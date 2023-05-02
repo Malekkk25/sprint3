@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Motor</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header" th:if="${mode=='new'}"> Add Motor </div>
+            <div class="card-header" th:if="${mode=='edit'}">Update Motor
+            </div>
+        <div class="card-body">
+            <form th:action="@{saveMotor}" method="post">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" >page :</label>
+                        <input type="text" name="page" class="form-control"
+                               th:value="${page}" />
+                        <label class="control-label" hidden>ID Motor :</label>
+                        <input type="hidden" name="idVol" class="form-control"
+                               th:value="${vol.idVol}" />
+                    </div>
+
+                    <label class="control-label">Name :</label>
+                    <input type="text" name="numVol" class="form-control"
+                           th:value="${vol.numVol}" />
+                    <span th:errors= ${vol.numVol} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Price :</label>
+                    <input type="text" name="destination" class="form-control"
+                           th:value="${vol.destination}" />
+                    <span th:errors=${vol.destination} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">date of creation :</label>
+                    <input type="date" name="agence" class="form-control"
+                           th:value="${vol.agence}"/>
+                    <span th:errors=${vol.agence} class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Maximum Speed :</label>
+                    <input type="text" name="dateDepart" class="form-control"
+                           th:value="${vol.dateDepart}" />
+                    <span th:errors= ${vol.dateDepart} class="text-danger"> </span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Color :</label>
+                    <input type="text" name="etat" class="form-control"
+                           th:value="${vol.etat}" />
+                    <span th:errors= ${vol.etat} class="text-danger"> </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <select class="form-control form-control-lg" id="type" name="type.id">
+                        <option value="">Select a type</option>
+                        <option th:each="type : ${aeroports}"
+                                th:value="${type.idAir}"
+                                th:text="${type.nomAir}"
+                                th:selected="${selectedAeroport != null and type.idAir == selectedAeroport.idAir}">
+                        </option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </form>
+        </div>
+        <br/>
+        <br/>
+        <a href="ListeMotors">List Of Motors</a>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
